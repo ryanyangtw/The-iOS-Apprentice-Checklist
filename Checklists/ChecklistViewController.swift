@@ -59,11 +59,13 @@ class ChecklistViewController: UITableViewController {
   
 // MARK: - Data Source
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-  
+    //println("In numberOfRowsInSection ")
     return self.items.count
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+    //println("In cellForRowAtIndexPath ")
     
     let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem") as UITableViewCell
     
@@ -75,6 +77,16 @@ class ChecklistViewController: UITableViewController {
     
     return cell
   
+  }
+  
+  override func tableView(tableView: UITableView, commitEditingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+  
+    // 1. Remove the item form data model
+    self.items.removeAtIndex(indexPath.row)
+    
+    // 2. deleete the corrspondoing row from talbe view
+    let indexPaths = [indexPath]
+    tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
   }
   
   
@@ -109,6 +121,24 @@ class ChecklistViewController: UITableViewController {
     // It's a property in UIView. Get the subview which matches the value(10000) in the tag parameter.
     let label = cell.viewWithTag(1000) as UILabel
     label.text = item.text
+  }
+  
+// MARK: - Action
+  
+  @IBAction func addItem() {
+    let newRowIndex = items.count
+    
+    let item = ChecklistItem()
+    item.text = "I am a new row"
+    item.checked = false
+    
+    self.items.append(item)
+    
+  
+    let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
+    let indexPaths = [indexPath]
+    tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+  
   }
   
   
