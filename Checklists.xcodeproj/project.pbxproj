@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9431D4CB1A8619B60037CC65 /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9431D4CA1A8619B50037CC65 /* ChecklistItem.swift */; };
-		9431D4D11A8654340037CC65 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9431D4D01A8654340037CC65 /* AddItemViewController.swift */; };
+		9431D4D11A8654340037CC65 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9431D4D01A8654340037CC65 /* ItemDetailViewController.swift */; };
 		948DEF141A8398B000DF18AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948DEF131A8398B000DF18AC /* AppDelegate.swift */; };
 		948DEF161A8398B000DF18AC /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 948DEF151A8398B000DF18AC /* ChecklistViewController.swift */; };
 		948DEF191A8398B000DF18AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 948DEF171A8398B000DF18AC /* Main.storyboard */; };
@@ -29,11 +29,11 @@
 
 /* Begin PBXFileReference section */
 		9431D4CA1A8619B50037CC65 /* ChecklistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
-		9431D4D01A8654340037CC65 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		9431D4D01A8654340037CC65 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ItemDetailViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		948DEF0E1A8398B000DF18AC /* Checklists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checklists.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		948DEF121A8398B000DF18AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		948DEF131A8398B000DF18AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		948DEF151A8398B000DF18AC /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
+		948DEF151A8398B000DF18AC /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChecklistViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		948DEF181A8398B000DF18AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		948DEF1A1A8398B000DF18AC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		948DEF1D1A8398B000DF18AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				948DEF151A8398B000DF18AC /* ChecklistViewController.swift */,
-				9431D4D01A8654340037CC65 /* AddItemViewController.swift */,
+				9431D4D01A8654340037CC65 /* ItemDetailViewController.swift */,
 				948DEF171A8398B000DF18AC /* Main.storyboard */,
 				9431D4CA1A8619B50037CC65 /* ChecklistItem.swift */,
 				948DEF1A1A8398B000DF18AC /* Images.xcassets */,
@@ -219,7 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				948DEF161A8398B000DF18AC /* ChecklistViewController.swift in Sources */,
-				9431D4D11A8654340037CC65 /* AddItemViewController.swift in Sources */,
+				9431D4D11A8654340037CC65 /* ItemDetailViewController.swift in Sources */,
 				9431D4CB1A8619B60037CC65 /* ChecklistItem.swift in Sources */,
 				948DEF141A8398B000DF18AC /* AppDelegate.swift in Sources */,
 			);

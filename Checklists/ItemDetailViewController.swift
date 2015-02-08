@@ -1,5 +1,5 @@
 //
-//  AddItemViewController.swift
+//  ItemDetailViewController.swift
 //  Checklists
 //
 //  Created by Ryan on 2015/2/7.
@@ -8,23 +8,23 @@
 
 import UIKit
 
-protocol AddItemViewControllerDelegate: class {
-  func addItemViewControllerDidCancel(controller: AddItemViewController)
+protocol ItemDetailViewControllerDelegate: class {
+  func itemDetailViewControllerDidCancel(controller: ItemDetailViewController)
   
   // Add New Item
-  func addItemViewController(controller: AddItemViewController, didFinishAddingItem item: ChecklistItem)
+  func itemDetailViewController(controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem)
   
   // Eiit Item
-  func addItemViewController(controller: AddItemViewController, didFinishEditingItem item: ChecklistItem)
+  func itemDetailViewController(controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem)
 }
 
 
-class AddItemViewController: UITableViewController, UITextFieldDelegate {
+class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
 
   @IBOutlet weak var textField: UITextField!
   @IBOutlet weak var doneBarButton: UIBarButtonItem!
   // ? means it's optional
-  weak var delegate: AddItemViewControllerDelegate?
+  weak var delegate: ItemDetailViewControllerDelegate?
   var itemToEdit: ChecklistItem?
   
 // MARK - Controller Life Cycle
@@ -53,7 +53,7 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
   
   @IBAction func cancel() {
     
-    delegate?.addItemViewControllerDidCancel(self)
+    delegate?.itemDetailViewControllerDidCancel(self)
     // Telling to the "presinting view controller" to close the screen with an animation
     //dismissViewControllerAnimated(true, completion: nil)
   }
@@ -62,13 +62,13 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
     
     if let item = itemToEdit {
       item.text = textField.text
-      delegate?.addItemViewController(self, didFinishEditingItem: item)
+      delegate?.itemDetailViewController(self, didFinishEditingItem: item)
     } else {
       let item = ChecklistItem()
       item.text = textField.text
       item.checked = false
       
-      delegate?.addItemViewController(self, didFinishAddingItem: item)
+      delegate?.itemDetailViewController(self, didFinishAddingItem: item)
     }
   
     //dismissViewControllerAnimated(true, completion: nil)

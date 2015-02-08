@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChecklistViewController: UITableViewController, AddItemViewControllerDelegate {
+class ChecklistViewController: UITableViewController, ItemDetailViewControllerDelegate {
   
 
   var items: [ChecklistItem]
@@ -106,14 +106,14 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }
  
-// MARK: - AddItemViewController Delegate
+// MARK: - ItemDetailViewController Delegate
   
-  func addItemViewControllerDidCancel(controller: AddItemViewController) {
+  func itemDetailViewControllerDidCancel(controller: ItemDetailViewController) {
     // Telling to the "presinting view controller" to close the screen with an animation
     dismissViewControllerAnimated(true, completion: nil)
   }
   
-  func addItemViewController(controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
+  func itemDetailViewController(controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem) {
     
     
     let newRowIndex = items.count
@@ -127,7 +127,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     dismissViewControllerAnimated(true, completion: nil)
   }
   
-  func addItemViewController(controller: AddItemViewController, didFinishEditingItem item: ChecklistItem) {
+  func itemDetailViewController(controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem) {
     
     println("in didFinishEditingItem")
     // "equatiable".find , ChecklistItem should be a equatible object
@@ -176,12 +176,12 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     
     if segue.identifier == "AddItem" {
       let navigationController = segue.destinationViewController as UINavigationController
-      let controller = navigationController.topViewController as AddItemViewController
+      let controller = navigationController.topViewController as ItemDetailViewController
       
       controller.delegate = self
     } else if segue.identifier == "EditItem" {
       let navigationController = segue.destinationViewController as UINavigationController
-      let controller = navigationController.topViewController as AddItemViewController
+      let controller = navigationController.topViewController as ItemDetailViewController
       
       controller.delegate = self
 
