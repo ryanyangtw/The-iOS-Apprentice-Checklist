@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChecklistViewController: UITableViewController {
+class ChecklistViewController: UITableViewController, AddItemViewControllerDelegate {
   
 
   var items: [ChecklistItem]
@@ -90,7 +90,7 @@ class ChecklistViewController: UITableViewController {
   }
   
   
-// MARK: - Delegate
+// MARK: - TableView Delegate
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
     
     // The mehod cellForRowAtIndexPath(indecPath) is different with the above method in Data source
@@ -105,7 +105,27 @@ class ChecklistViewController: UITableViewController {
   
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }
+ 
+// MARK: - AddItemViewController Delegate
   
+  func addItemViewControllerDidCancel(controller: AddItemViewController) {
+    // Telling to the "presinting view controller" to close the screen with an animation
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func addItemViewController(controller: AddItemViewController, didFinishAddingItem item: ChecklistItem) {
+    
+    
+    let newRowIndex = items.count
+    
+    items.append(item)
+    
+    let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
+    let indexPaths = [indexPath]
+    tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+        
+    dismissViewControllerAnimated(true, completion: nil)
+  }
   
 // MARK: - Instance Methosd
   func configureCheckmarkForCell(cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
@@ -123,22 +143,18 @@ class ChecklistViewController: UITableViewController {
     label.text = item.text
   }
   
-// MARK: - Action
+
   
-  @IBAction func addItem() {
-    let newRowIndex = items.count
-    
-    let item = ChecklistItem()
-    item.text = "I am a new row"
-    item.checked = false
-    
-    self.items.append(item)
-    
+// MARK: - Prepare For Segue
   
-    let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
-    let indexPaths = [indexPath]
-    tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
-  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    
+    if segue.identifier == "AddItem" {
+      let navigationController = segue.destinationViewController as UINavigationController
+      let controller = navigationController.topViewController as AddItemViewController
+      
+      controller.delegate = self
+    }
   }
   
   
