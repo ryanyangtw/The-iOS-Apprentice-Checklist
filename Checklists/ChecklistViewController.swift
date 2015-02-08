@@ -123,17 +123,42 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
     let indexPaths = [indexPath]
     tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
-        
+    
     dismissViewControllerAnimated(true, completion: nil)
   }
   
+  func addItemViewController(controller: AddItemViewController, didFinishEditingItem item: ChecklistItem) {
+    
+    println("in didFinishEditingItem")
+    // "equatiable".find , ChecklistItem should be a equatible object
+    if let index = find(items, item) {
+      let indexPath = NSIndexPath(forRow: index, inSection: 0)
+      if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+        configureTextForCell(cell, withChecklistItem: item)
+      }
+    }
+
+    dismissViewControllerAnimated(true, completion: nil)
+  
+  }
+  
+  
+  
+  
+  
+  
 // MARK: - Instance Methosd
+  
   func configureCheckmarkForCell(cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
     
+    let label = cell.viewWithTag(1001) as UILabel
+    
     if item.checked {
-      cell.accessoryType = .Checkmark
+      //cell.accessoryType = .Checkmark
+      label.text = "√"
     } else {
-      cell.accessoryType = .None
+      //cell.accessoryType = .None
+      label.text = ""
     }
   }
   
@@ -154,6 +179,17 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
       let controller = navigationController.topViewController as AddItemViewController
       
       controller.delegate = self
+    } else if segue.identifier == "EditItem" {
+      let navigationController = segue.destinationViewController as UINavigationController
+      let controller = navigationController.topViewController as AddItemViewController
+      
+      controller.delegate = self
+
+      // Unwrap the NSIndexPath? from tableView.indexPathForCell
+      if let indexPath = tableView.indexPathForCell(sender as UITableViewCell) {
+        controller.itemToEdit = items[indexPath.row]
+      }
+    
     }
   }
   

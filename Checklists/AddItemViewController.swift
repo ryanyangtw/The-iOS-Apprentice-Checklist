@@ -10,7 +10,12 @@ import UIKit
 
 protocol AddItemViewControllerDelegate: class {
   func addItemViewControllerDidCancel(controller: AddItemViewController)
+  
+  // Add New Item
   func addItemViewController(controller: AddItemViewController, didFinishAddingItem item: ChecklistItem)
+  
+  // Eiit Item
+  func addItemViewController(controller: AddItemViewController, didFinishEditingItem item: ChecklistItem)
 }
 
 
@@ -20,12 +25,21 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
   @IBOutlet weak var doneBarButton: UIBarButtonItem!
   // ? means it's optional
   weak var delegate: AddItemViewControllerDelegate?
+  var itemToEdit: ChecklistItem?
   
 // MARK - Controller Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     // Add this line for bug in ios8
     self.tableView.rowHeight = 44;
+    
+    // Unwrap the optional
+    if let item = itemToEdit {
+      title = "Edit Item"
+      self.textField.text = item.text
+      self.doneBarButton.enabled = true
+    }
+    
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -45,13 +59,18 @@ class AddItemViewController: UITableViewController, UITextFieldDelegate {
   }
   
   @IBAction func done() {
-    //println("Contnts of the text field: \(textField.text)")
     
-    let item = ChecklistItem()
-    item.text = textField.text
-    item.checked = false
-    
-    delegate?.addItemViewController(self, didFinishAddingItem: item)
+    if let item = itemToEdit {
+      item.text = textField.text
+      delegate?.addItemViewController(self, didFinishEditingItem: item)
+    } else {
+      let item = ChecklistItem()
+      item.text = textField.text
+      item.checked = false
+      
+      delegate?.addItemViewController(self, didFinishAddingItem: item)
+    }
+  
     //dismissViewControllerAnimated(true, completion: nil)
   }
   
