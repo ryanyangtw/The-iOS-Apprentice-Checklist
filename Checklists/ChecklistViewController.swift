@@ -10,12 +10,14 @@ import UIKit
 
 class ChecklistViewController: UITableViewController, ItemDetailViewControllerDelegate {
   
-
+  var checklist: Checklist!
   var items: [ChecklistItem]
   
   required init(coder aDecoder: NSCoder) {
     
-    items = [ChecklistItem]() //????
+    // [ChecklistItem]: means an array of ChecklistItem objects
+    // (): tell Swift to make the new array object
+    items = [ChecklistItem]()
     
     /*
     let row0item = ChecklistItem()
@@ -37,6 +39,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
     self.tableView.rowHeight = 44;
+    self.title = checklist.name
   }
 
   override func didReceiveMemoryWarning() {
@@ -123,6 +126,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     
     println("in didFinishEditingItem")
     // "equatiable".find , ChecklistItem should be a equatible object
+    //  NSObject is equatable
     if let index = find(items, item) {
       let indexPath = NSIndexPath(forRow: index, inSection: 0)
       if let cell = tableView.cellForRowAtIndexPath(indexPath) {
