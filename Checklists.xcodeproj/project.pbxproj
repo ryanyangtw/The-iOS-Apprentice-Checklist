@@ -96,11 +96,11 @@
 				948DEF171A8398B000DF18AC /* Main.storyboard */,
 				948DEF1A1A8398B000DF18AC /* Images.xcassets */,
 				948DEF1C1A8398B000DF18AC /* LaunchScreen.xib */,
-				9431D4CA1A8619B50037CC65 /* ChecklistItem.swift */,
-				94BE50311A88CD7700EB3EAD /* Checklist.swift */,
 				948DEF131A8398B000DF18AC /* AppDelegate.swift */,
 				948DEF111A8398B000DF18AC /* Supporting Files */,
 				944288431A89E98D00E3F04E /* DataModel.swift */,
+				94BE50311A88CD7700EB3EAD /* Checklist.swift */,
+				9431D4CA1A8619B50037CC65 /* ChecklistItem.swift */,
 			);
 			path = Checklists;
 			sourceTree = "<group>";

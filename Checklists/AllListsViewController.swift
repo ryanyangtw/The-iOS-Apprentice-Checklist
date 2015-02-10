@@ -8,11 +8,39 @@
 
 import UIKit
 
-class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate {
+class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
   
   // var lists: Array<Checklist>
   //var lists: [Checklist]
   var dataModel: DataModel!
+  
+// MARK: - Controller life cycle
+  required init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    println("In AllListsViewController init")
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    println("In ViewDidLoad")
+    
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    
+    navigationController?.delegate = self
+    
+    println("In ViewDidAppear")
+    
+    let index = self.dataModel.indexOfSelectedChecklist
+    println("Index: \(index)")
+    if index >= 0 && index < dataModel.lists.count {
+      let checklist = dataModel.lists[index]
+      performSegueWithIdentifier("ShowChecklist", sender: checklist)
+    }
+  
+  }
   
 // MARK: - Table view data source
 
@@ -53,6 +81,9 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
 // MARK: - Table View Delegate
 
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+    dataModel.indexOfSelectedChecklist = indexPath.row
+    //NSUserDefaults.standardUserDefaults().setInteger(indexPath.row, forKey: "ChecklistIndex")
 
     let checklist = self.dataModel.lists[indexPath.row]
     
@@ -77,7 +108,19 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
   }
   
+// MARK: - UINavigationControllerDelegate Delegate
   
+  // This mehoid is called whenever the navigation controller will slide to a new screen.
+  func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+    
+    println("In UINavigationControllerDelegate willShowViewController")
+    /// === means checking whether two variavles refer to the exact same object
+    if viewController === self {
+      dataModel.indexOfSelectedChecklist = -1
+      //NSUserDefaults.standardUserDefaults().setInteger(-1, forKey: "ChecklistIndex")
+    }
+  
+  }
     
 // MARK: - Navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

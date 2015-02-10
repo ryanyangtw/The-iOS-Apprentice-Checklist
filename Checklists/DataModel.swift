@@ -12,13 +12,46 @@ import Foundation
 class DataModel {
   var lists = [Checklist]()
   
+  // Computed property
+  var indexOfSelectedChecklist: Int {
+    get {
+      return NSUserDefaults.standardUserDefaults().integerForKey("ChecklistIndex")
+    }
+    set {
+      NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "ChecklistIndex")
+    }
   
-  init() {
-    loadChecklists()
   }
   
   
-  // MARK: - Documents
+  init() {
+    println("In dataModel init")
+    loadChecklists()
+    registerDefaults()
+    handleFirstTime()
+  }
+  
+
+  func registerDefaults() {
+    let dictionary = ["ChecklistIndex": -1, "FirstTime": true]
+    // registerDefaults: 當key,value不存在時寫入，若已存在則不覆蓋
+    NSUserDefaults.standardUserDefaults().registerDefaults(dictionary)
+ 
+  }
+  
+  func handleFirstTime() {
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let firstTime = userDefaults.boolForKey("FirstTime")
+    if firstTime {
+      let checklist = Checklist(name: "List")
+      self.lists.append(checklist)
+      self.indexOfSelectedChecklist = 0
+      userDefaults.setBool(false, forKey: "FirstTime")
+    }
+  }
+  
+  
+// MARK: - Documents
   
   func documentsDirectory() -> String {
     let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as [String]

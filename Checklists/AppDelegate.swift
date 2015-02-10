@@ -16,12 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    println("In didFinishLaunchingWithOptions")
     
     let navigationController = window!.rootViewController as UINavigationController
     
     let controller = navigationController.viewControllers[0] as AllListsViewController
     
     controller.dataModel = self.dataModel
+    
     return true
   }
 
