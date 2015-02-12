@@ -27,7 +27,7 @@ class DataModel {
   init() {
     println("\(documentsDirectory())")
     
-    println("In dataModel init")
+    //println("In dataModel init")
     loadChecklists()
     registerDefaults()
     handleFirstTime()
@@ -35,7 +35,7 @@ class DataModel {
   
 
   func registerDefaults() {
-    let dictionary = ["ChecklistIndex": -1, "FirstTime": true]
+    let dictionary = ["ChecklistIndex": -1, "FirstTime": true, "ChecklistItemID" : 0]
     // registerDefaults: 當key,value不存在時寫入，若已存在則不覆蓋
     NSUserDefaults.standardUserDefaults().registerDefaults(dictionary)
  
@@ -55,6 +55,22 @@ class DataModel {
   
   func sortChecklists() {
     self.lists.sort({ checklist1, checklist2 in return checklist1.name.localizedStandardCompare(checklist2.name) ==  NSComparisonResult.OrderedAscending })
+  }
+  
+  
+// MARK: - Class Method
+  
+  class func nextChecklistItemID() -> Int {
+    let userDefaults = NSUserDefaults.standardUserDefaults()
+    let itemID = userDefaults.integerForKey("ChecklistItemID")
+    
+    userDefaults.setInteger(itemID + 1, forKey: "ChecklistItemID")
+    
+    // Force NSUserDefaults to write these chenage immediately
+    userDefaults.synchronize()
+    
+    return itemID
+  
   }
   
   

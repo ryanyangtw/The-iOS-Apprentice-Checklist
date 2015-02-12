@@ -126,7 +126,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
   
   func itemDetailViewController(controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem) {
     
-    println("in didFinishEditingItem")
     // "equatiable".find , ChecklistItem should be a equatible object
     //  NSObject is equatable
     if let index = find(self.checklist.items, item) {
@@ -167,6 +166,8 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     // It's a property in UIView. Get the subview which matches the value(10000) in the tag parameter.
     let label = cell.viewWithTag(1000) as UILabel
     label.text = item.text
+    //label.text = "\(item.itemID): \(item.text)"
+    
   }
   
 

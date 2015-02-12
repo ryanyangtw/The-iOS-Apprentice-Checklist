@@ -98,9 +98,7 @@
 				948DEF1A1A8398B000DF18AC /* Images.xcassets */,
 				948DEF131A8398B000DF18AC /* AppDelegate.swift */,
 				948DEF111A8398B000DF18AC /* Supporting Files */,
-				944288431A89E98D00E3F04E /* DataModel.swift */,
-				94BE50311A88CD7700EB3EAD /* Checklist.swift */,
-				9431D4CA1A8619B50037CC65 /* ChecklistItem.swift */,
+				94C9C8A81A8CEABD00D1FB4E /* Model */,
 			);
 			path = Checklists;
 			sourceTree = "<group>";
@@ -128,6 +126,16 @@
 				948DEF281A8398B000DF18AC /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		94C9C8A81A8CEABD00D1FB4E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				944288431A89E98D00E3F04E /* DataModel.swift */,
+				94BE50311A88CD7700EB3EAD /* Checklist.swift */,
+				9431D4CA1A8619B50037CC65 /* ChecklistItem.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

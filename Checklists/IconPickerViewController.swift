@@ -25,7 +25,7 @@ class IconPickerViewController: UITableViewController {
       "Drinks",
       "Folder",
       "Groceries",
-      "Index",
+      "Inbox",
       "Photos",
       "Trips"]
 

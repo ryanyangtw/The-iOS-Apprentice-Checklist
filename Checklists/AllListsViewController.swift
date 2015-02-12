@@ -17,20 +17,17 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
 // MARK: - Controller life cycle
   required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
-    println("In AllListsViewController init")
   }
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     
     // reload tableview all contents (call tableView(cellForRowAtIndexPath) again fot every visible row)
-    println("In ViewWillAppear")
     self.tableView.reloadData()
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    println("In ViewDidLoad")
   
   }
   
@@ -39,10 +36,9 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     navigationController?.delegate = self
     
-    println("In ViewDidAppear")
     
     let index = self.dataModel.indexOfSelectedChecklist
-    println("Index: \(index)")
+    //println("Index: \(index)")
     if index >= 0 && index < dataModel.lists.count {
       let checklist = dataModel.lists[index]
       performSegueWithIdentifier("ShowChecklist", sender: checklist)
@@ -132,7 +128,6 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
   // This mehoid is called whenever the navigation controller will slide to a new screen.
   func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
     
-    println("In UINavigationControllerDelegate willShowViewController")
     /// === means checking whether two variavles refer to the exact same object
     if viewController === self {
       dataModel.indexOfSelectedChecklist = -1
@@ -143,7 +138,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
 // MARK: - Navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    
+
     if segue.identifier == "ShowChecklist" {
       
       //let navigationController = segue.destinationViewController as UINavigationController
@@ -170,7 +165,6 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
   func listDetailViewController(controller: ListDetailViewController, didFinishAddingChecklist checklist: Checklist) {
     
     //let newRowIndex = self.dataModel.lists.count
-    println("In didFinishAddingChecklist")
     self.dataModel.lists.append(checklist)
     
     /*
