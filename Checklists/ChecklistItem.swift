@@ -18,9 +18,18 @@ class ChecklistItem: NSObject, NSCoding {
     super.init()
   }
   
-  override init() {
+  init(text: String, checked: Bool) {
+    self.text = text
+    self.checked = checked
     super.init()
   }
+  
+  convenience override init() {
+    self.init(text: "", checked: false)
+    //super.init()
+  }
+  
+
   
   func encodeWithCoder(aCoder: NSCoder) {
     aCoder.encodeObject(self.text, forKey: "Text")

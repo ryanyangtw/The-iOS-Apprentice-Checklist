@@ -25,6 +25,8 @@ class DataModel {
   
   
   init() {
+    println("\(documentsDirectory())")
+    
     println("In dataModel init")
     loadChecklists()
     registerDefaults()
@@ -43,12 +45,19 @@ class DataModel {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     let firstTime = userDefaults.boolForKey("FirstTime")
     if firstTime {
-      let checklist = Checklist(name: "List")
+      let checklist = Checklist(name: "List", iconName: "Folder")
+      //checklist.iconName = "Folder"
       self.lists.append(checklist)
       self.indexOfSelectedChecklist = 0
       userDefaults.setBool(false, forKey: "FirstTime")
     }
   }
+  
+  func sortChecklists() {
+    self.lists.sort({ checklist1, checklist2 in return checklist1.name.localizedStandardCompare(checklist2.name) ==  NSComparisonResult.OrderedAscending })
+  }
+  
+  
   
   
 // MARK: - Documents
@@ -81,5 +90,7 @@ class DataModel {
         unarchiver.finishDecoding()
       }
     }
+    
+    sortChecklists()
   }
 }

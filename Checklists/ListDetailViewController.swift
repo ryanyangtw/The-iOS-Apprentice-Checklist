@@ -14,18 +14,20 @@ protocol ListDetailViewControllerDelegate: class {
   func listDetailViewController(controller: ListDetailViewController, didFinishAddingChecklist checklist: Checklist)
   
   func listDetailViewController(controller: ListDetailViewController, didFinishEditingChecklist checklist: Checklist)
-  
 }
 
 
-class ListDetailViewController: UITableViewController, UITextFieldDelegate {
+class ListDetailViewController: UITableViewController, UITextFieldDelegate, IconPickerViewControllerDelegate {
 
   @IBOutlet weak var textField: UITextField!
   @IBOutlet weak var doneBarButton: UIBarButtonItem!
   
+  @IBOutlet weak var iconImageView: UIImageView!
+  
   weak var delegate: ListDetailViewControllerDelegate?
   
   var checklistToEdit: Checklist?
+  var iconName = "Folder"
 
 // MARK - Controller Life Cycle
 
@@ -37,7 +39,10 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
       self.title = "Edit Checklist"
       self.textField.text = checklist.name
       self.doneBarButton.enabled = true
+      self.iconName = checklist.iconName
     }
+    
+    self.iconImageView.image = UIImage(named: self.iconName)
   }
   
   override func viewWillAppear(animated: Bool) {
@@ -48,8 +53,13 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
 // MARK: - Table View Delegate
   
   override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-  
-    return nil
+    
+    if indexPath.section == 1 {
+      return indexPath
+    } else {
+      return nil
+    }
+    
   }
   
 // MARK: - TextField Delegate
@@ -64,10 +74,21 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     return true
   }
   
+// MARK: - IconPickerViewControllerDelegate Delegate
+  
+  func iconPicker(picker: IconPickerViewController, didPickIcon iconName: String) {
+  
+    self.iconName = iconName
+    self.iconImageView.image = UIImage(named: iconName)
+    // Because the Icon Picker is on the navigation stack
+    navigationController?.popViewControllerAnimated(true)
+  }
+  
   
   
 // MARK: - Action
   
+
   @IBAction func cancel() {
     delegate?.listDetailViewControllerDidCancel(self)
   }
@@ -75,16 +96,24 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
   @IBAction func done() {
     if let checklist = checklistToEdit {
       // Edit checlist
-      checklist.name = self.textField.text
+      let checklist = Checklist(name: self.textField.text, iconName: self.iconName)
+      
       delegate?.listDetailViewController(self, didFinishEditingChecklist: checklist)
     } else {
       // Add new checklist
       let checklist = Checklist(name: self.textField.text)
+      checklist.iconName = self.iconName
       delegate?.listDetailViewController(self, didFinishAddingChecklist: checklist)
     }
   }
-
-
-
+  
+  
+// MARK: - Navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "PickIcon" {
+      let controller = segue.destinationViewController as IconPickerViewController
+      controller.delegate = self
+    }
+  }
 
 }
