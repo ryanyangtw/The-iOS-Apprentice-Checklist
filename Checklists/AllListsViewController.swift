@@ -110,9 +110,9 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
   override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
     
     // Create the new controller (ListNavigationController)
-    let navigationController = storyboard!.instantiateViewControllerWithIdentifier("ListNavigationController") as UINavigationController
+    let navigationController = storyboard!.instantiateViewControllerWithIdentifier("ListNavigationController") as! UINavigationController
     
-    let controller = navigationController.topViewController as ListDetailViewController
+    let controller = navigationController.topViewController as! ListDetailViewController
     
     controller.delegate = self
     let checklist = self.dataModel.lists[indexPath.row]
@@ -143,12 +143,12 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
       
       //let navigationController = segue.destinationViewController as UINavigationController
       //let controller = navigationController.topViewController as ListDetailViewController
-      let controller = segue.destinationViewController as ChecklistViewController
-      controller.checklist = sender as Checklist
+      let controller = segue.destinationViewController as! ChecklistViewController
+      controller.checklist = sender as! Checklist
     } else if segue.identifier == "AddChecklist" {
-      let navigationController = segue.destinationViewController as UINavigationController
+      let navigationController = segue.destinationViewController as! UINavigationController
       
-      let controller = navigationController.topViewController as ListDetailViewController
+      let controller = navigationController.topViewController as! ListDetailViewController
       
       controller.delegate = self
       controller.checklistToEdit = nil

@@ -79,7 +79,7 @@ class DataModel {
 // MARK: - Documents
   
   func documentsDirectory() -> String {
-    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as [String]
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! [String]
     
     return paths[0]
   }
@@ -102,7 +102,7 @@ class DataModel {
       if let data = NSData(contentsOfFile: path) {
         
         let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
-        self.lists = unarchiver.decodeObjectForKey("Checklists") as [Checklist]
+        self.lists = unarchiver.decodeObjectForKey("Checklists") as! [Checklist]
         unarchiver.finishDecoding()
       }
     }

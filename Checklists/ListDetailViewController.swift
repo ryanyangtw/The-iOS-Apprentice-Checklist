@@ -115,7 +115,7 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate, Icon
 // MARK: - Navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "PickIcon" {
-      let controller = segue.destinationViewController as IconPickerViewController
+      let controller = segue.destinationViewController as! IconPickerViewController
       controller.delegate = self
     }
   }

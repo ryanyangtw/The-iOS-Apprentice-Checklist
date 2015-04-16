@@ -39,9 +39,9 @@ class Checklist: NSObject, NSCoding {
 // NSCoding protocol
   
   required init(coder aDecoder: NSCoder) {
-    self.name = aDecoder.decodeObjectForKey("Name") as String
-    self.items = aDecoder.decodeObjectForKey("Items") as [ChecklistItem]
-    self.iconName = aDecoder.decodeObjectForKey("IconName") as String
+    self.name = aDecoder.decodeObjectForKey("Name") as! String
+    self.items = aDecoder.decodeObjectForKey("Items") as! [ChecklistItem]
+    self.iconName = aDecoder.decodeObjectForKey("IconName") as! String
     super.init()
   }
   

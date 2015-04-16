@@ -60,7 +60,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     
     //println("In cellForRowAtIndexPath ")
     
-    let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem") as UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem") as! UITableViewCell
     
     
     let item = self.checklist.items[indexPath.row]
@@ -118,8 +118,9 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     
     let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
     let indexPaths = [indexPath]
+    //println("Before insertRowsAtIndexPaths")
     tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
-    
+    //println("After insertRowsAtIndexPaths")
     dismissViewControllerAnimated(true, completion: nil)
     //saveChecklistItems()
   }
@@ -149,7 +150,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
   
   func configureCheckmarkForCell(cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
     
-    let label = cell.viewWithTag(1001) as UILabel
+    let label = cell.viewWithTag(1001) as! UILabel
         label.textColor = view.tintColor
     
     if item.checked {
@@ -164,7 +165,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
   
   func configureTextForCell(cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
     // It's a property in UIView. Get the subview which matches the value(10000) in the tag parameter.
-    let label = cell.viewWithTag(1000) as UILabel
+    let label = cell.viewWithTag(1000) as! UILabel
     label.text = item.text
     //label.text = "\(item.itemID): \(item.text)"
     
@@ -177,18 +178,18 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
     if segue.identifier == "AddItem" {
-      let navigationController = segue.destinationViewController as UINavigationController
-      let controller = navigationController.topViewController as ItemDetailViewController
+      let navigationController = segue.destinationViewController as! UINavigationController
+      let controller = navigationController.topViewController as! ItemDetailViewController
       
       controller.delegate = self
     } else if segue.identifier == "EditItem" {
-      let navigationController = segue.destinationViewController as UINavigationController
-      let controller = navigationController.topViewController as ItemDetailViewController
+      let navigationController = segue.destinationViewController as! UINavigationController
+      let controller = navigationController.topViewController as! ItemDetailViewController
       
       controller.delegate = self
 
       // Unwrap the NSIndexPath? from tableView.indexPathForCell
-      if let indexPath = tableView.indexPathForCell(sender as UITableViewCell) {
+      if let indexPath = tableView.indexPathForCell(sender as! UITableViewCell) {
         controller.itemToEdit = self.checklist.items[indexPath.row]
       }
     

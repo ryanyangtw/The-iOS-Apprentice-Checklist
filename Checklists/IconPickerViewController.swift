@@ -53,7 +53,7 @@ class IconPickerViewController: UITableViewController {
 
  
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-      let cell = tableView.dequeueReusableCellWithIdentifier("IconCell", forIndexPath: indexPath) as UITableViewCell
+      let cell = tableView.dequeueReusableCellWithIdentifier("IconCell", forIndexPath: indexPath) as! UITableViewCell
 
       let iconName = icons[indexPath.row]
       cell.textLabel!.text = iconName

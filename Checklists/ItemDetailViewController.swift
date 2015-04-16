@@ -142,7 +142,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
 
 
     if let pickerCell = tableView.cellForRowAtIndexPath(indexPathDatePicker) {
-      let datePicker = pickerCell.viewWithTag(100) as UIDatePicker
+      let datePicker = pickerCell.viewWithTag(100) as! UIDatePicker
       datePicker.setDate(self.dueDate, animated: false)
     }
   }
@@ -217,16 +217,8 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
   
   
 
-// MARK: - Delegate
-  override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-    
-    if indexPath.section == 1 && indexPath.row == 1 {
-      return indexPath
-    } else {
-      return nil
-    }
-  }
-  
+// MARK: - Textfield Delegate
+
   // It's invoked every time the user changes the text, whether by tapping on the keyboard or cut/paste
   func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
     
@@ -242,6 +234,16 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     return true
   }
   
+// MARK: - TableView Delegate 
+  
+  override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    
+    if indexPath.section == 1 && indexPath.row == 1 {
+      return indexPath
+    } else {
+      return nil
+    }
+  }
   
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
